@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏔️ 北海道 6天5夜自駕行程 — 3/15~3/20</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
@@ -305,6 +307,85 @@
   }
   .hotel-card .card-title { color: #A29BFE; }
 
+  /* Map styles */
+  .map-section {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+  }
+  .map-header h3 {
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .map-header a {
+    font-size: 0.78em;
+    color: #FF6B6B;
+    text-decoration: none;
+    padding: 4px 12px;
+    border: 1px solid rgba(255,107,107,0.3);
+    border-radius: 14px;
+    transition: all 0.2s;
+  }
+  .map-header a:hover { background: rgba(255,107,107,0.15); }
+  .map-container {
+    height: 380px;
+    width: 100%;
+    background: #1a2836;
+  }
+  .map-stops {
+    padding: 12px 16px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .map-stop {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78em;
+    color: var(--text-muted);
+  }
+  .map-stop .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.7em;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .map-stop .arrow {
+    color: var(--border);
+    margin: 0 2px;
+  }
+  .leaflet-popup-content-wrapper {
+    background: #1a2836 !important;
+    color: #e8edf2 !important;
+    border-radius: 10px !important;
+    border: 1px solid #2a3f55 !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+  }
+  .leaflet-popup-tip { background: #1a2836 !important; }
+  .leaflet-popup-content { font-family: 'Noto Sans TC', sans-serif !important; font-size: 13px !important; }
+  .popup-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .popup-desc { color: #8899aa; font-size: 12px; }
+
   /* Responsive */
   @media (max-width: 600px) {
     .hero h1 { font-size: 1.5em; }
@@ -397,6 +478,25 @@
   <div class="day-header">
     <h2 style="color:var(--day1)">Day 1 — 3/15（日）</h2>
     <div class="route-summary">✈️ 千歲機場 → 🦀 苫小牧 → ♨️ 登別溫泉</div>
+  </div>
+
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 1 路線圖</h3>
+      <a href="https://www.google.com/maps/dir/新千歳空港/ぷらっとみなと市場+苫小牧/登別地獄谷/登別大湯沼/第一滝本館" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map1"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#E74C3C">1</span> 新千歲機場</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#E74C3C">2</span> 苫小牧市場</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#E74C3C">3</span> 地獄谷</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#E74C3C">4</span> 大湯沼</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#E74C3C">5</span> 第一瀧本館</span>
+    </div>
   </div>
 
   <div class="drive-banner">
@@ -516,6 +616,25 @@
     <div class="route-summary">♨️ 登別 → 🏔️ 洞爺湖</div>
   </div>
 
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 2 路線圖</h3>
+      <a href="https://www.google.com/maps/dir/第一滝本館+登別/極楽通商店街+登別温泉/望羊蹄+洞爺湖/レークヒルファーム/サイロ展望台+洞爺湖/ザレイクスイート湖の栖" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map2"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#3498DB">1</span> 極樂通商店街</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#3498DB">2</span> 望羊蹄</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#3498DB">3</span> Lake Hill Farm</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#3498DB">4</span> サイロ展望台</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#3498DB">5</span> 湖の栖</span>
+    </div>
+  </div>
+
   <div class="drive-banner">
     <span class="icon">🚗</span>
     <div>登別 → 洞爺湖｜車程約 1小時</div>
@@ -612,6 +731,29 @@
   <div class="day-header">
     <h2 style="color:var(--day3)">Day 3 — 3/17（二）</h2>
     <div class="route-summary">🏔️ 洞爺湖 → 🦀 小樽（半天）→ 🌃 札幌</div>
+  </div>
+
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 3 路線圖</h3>
+      <a href="https://www.google.com/maps/dir/ザレイクスイート湖の栖/滝波食堂+小樽/小樽運河/堺町通り+小樽/LeTAO+小樽/小樽住吉神社/狸小路商店街+札幌/士別成吉思汗+すすきの" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map3"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#2ECC71">1</span> 洞爺湖</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">2</span> 滝波食堂</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">3</span> 小樽運河</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">4</span> 堺町通り</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">5</span> LeTAO</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">6</span> 住吉神社</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">7</span> 札幌 Airbnb</span>
+    </div>
   </div>
 
   <div class="drive-banner">
@@ -767,6 +909,31 @@
   <div class="day-header">
     <h2 style="color:var(--day4)">Day 4 — 3/18（三）</h2>
     <div class="route-summary">🌃 札幌全日 — 神社→美食→購物→夜景</div>
+  </div>
+
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 4 路線圖（札幌市內）</h3>
+      <a href="https://www.google.com/maps/dir/二条市場+札幌/北海道神宮/六花亭+神宮茶屋店/円山公園+札幌/元祖さっぽろラーメン横丁/白い恋人パーク/札幌市時計台/北海道庁旧本庁舎/大通公園+札幌/Suage%2B+札幌/もいわ山ロープウェイ" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map4"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#F39C12">1</span> 二條市場</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">2</span> 北海道神宮</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">3</span> 拉麵悠</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">4</span> 白色戀人</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">5</span> 時計台</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">6</span> 大通公園</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">7</span> Suage+</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">8</span> 藻岩山</span>
+    </div>
   </div>
 
   <div class="drive-banner">
@@ -1011,6 +1178,27 @@
     <div class="route-summary">🌃 札幌 → 🐧 旭川（旭山動物園）</div>
   </div>
 
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 5 路線圖</h3>
+      <a href="https://www.google.com/maps/dir/札幌/旭山動物園/旭川ラーメン青葉+本店/福吉カフェ+旭橋本店/平和通買物公園+旭川/JRイン旭川/梅光軒+旭川本店" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map5"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#9B59B6">1</span> 札幌出發</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">2</span> 旭山動物園</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">3</span> 拉麵青葉</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">4</span> 福吉カフェ</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">5</span> 買物公園</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">6</span> JR Inn</span>
+    </div>
+  </div>
+
   <div class="drive-banner">
     <span class="icon">🚗</span>
     <div>札幌 → 旭川｜車程約 2小時（道央自動車道）</div>
@@ -1131,6 +1319,23 @@
     <div class="route-summary">🏔️ 旭川 → 🛍️ 北廣島 Outlet → ✈️ 千歲機場</div>
   </div>
 
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ Day 6 路線圖</h3>
+      <a href="https://www.google.com/maps/dir/JRイン旭川/成吉思汗大黒屋+旭川/三井アウトレットパーク+札幌北広島/新千歳空港" target="_blank">📱 Google Maps 導航</a>
+    </div>
+    <div class="map-container" id="map6"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#1ABC9C">1</span> JR Inn 旭川</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#1ABC9C">2</span> 大黒屋</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#1ABC9C">3</span> 三井 Outlet</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#1ABC9C">4</span> 千歲機場 ✈️</span>
+    </div>
+  </div>
+
   <div class="drive-banner">
     <span class="icon">🚗</span>
     <div>旭川 → 北廣島 Outlet（2hr）→ 千歲機場（40min）｜✈️ 19:30 出發</div>
@@ -1226,6 +1431,27 @@
     <h2>📋 行程總覽</h2>
   </div>
 
+  <div class="map-section">
+    <div class="map-header">
+      <h3>🗺️ 6天全程路線總覽</h3>
+      <a href="https://www.google.com/maps/dir/新千歳空港/苫小牧/登別温泉/洞爺湖温泉/小樽/札幌/旭川/三井アウトレットパーク+札幌北広島/新千歳空港" target="_blank">📱 Google Maps 全程</a>
+    </div>
+    <div class="map-container" id="map0" style="height:450px;"></div>
+    <div class="map-stops">
+      <span class="map-stop"><span class="num" style="background:#E74C3C">D1</span> 千歲→登別</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#3498DB">D2</span> 洞爺湖</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#2ECC71">D3</span> 小樽→札幌</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#F39C12">D4</span> 札幌</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#9B59B6">D5</span> 旭川</span>
+      <span class="map-stop arrow">→</span>
+      <span class="map-stop"><span class="num" style="background:#1ABC9C">D6</span> 千歲✈️</span>
+    </div>
+  </div>
+
   <div class="section-label">🗺️ 每日行車路線</div>
   <table class="summary-table">
     <tr><th>日期</th><th>路線</th><th>車程</th></tr>
@@ -1267,6 +1493,142 @@
 </div>
 
 <script>
+const maps = {};
+const dayColors = {1:'#E74C3C',2:'#3498DB',3:'#2ECC71',4:'#F39C12',5:'#9B59B6',6:'#1ABC9C'};
+
+const routeData = {
+  1: {
+    center: [42.55, 141.5], zoom: 9,
+    stops: [
+      {lat:42.7752,lng:141.6922,name:'新千歲機場',desc:'12:40 抵達',icon:'✈️'},
+      {lat:42.6340,lng:141.6050,name:'ぷらっとみなと市場',desc:'午餐：北寄貝',icon:'🦀'},
+      {lat:42.4943,lng:141.1381,name:'登別地獄谷',desc:'火山口散步 40~60min',icon:'🌋'},
+      {lat:42.4985,lng:141.1340,name:'大湯沼＆天然足湯',desc:'免費足湯',icon:'♨️'},
+      {lat:42.4953,lng:141.1432,name:'第一瀧本館',desc:'住宿：9種泉質溫泉',icon:'🏨'}
+    ]
+  },
+  2: {
+    center: [42.55, 141.1], zoom: 10,
+    stops: [
+      {lat:42.4960,lng:141.1420,name:'極樂通商店街',desc:'登別溫泉街散步',icon:'🏮'},
+      {lat:42.5740,lng:140.8490,name:'望羊蹄',desc:'午餐：70年洋食老店',icon:'🍖'},
+      {lat:42.5987,lng:140.8300,name:'Lake Hill Farm',desc:'牧場冰淇淋',icon:'🍦'},
+      {lat:42.5940,lng:140.8080,name:'サイロ展望台',desc:'洞爺湖全景拍照點',icon:'📸'},
+      {lat:42.5710,lng:140.8510,name:'ザ・レイクスイート湖の栖',desc:'住宿：頂級湖景飯店',icon:'🏨'}
+    ]
+  },
+  3: {
+    center: [43.05, 141.1], zoom: 8,
+    stops: [
+      {lat:42.5710,lng:140.8510,name:'洞爺湖出發',desc:'09:30 Checkout',icon:'🚗'},
+      {lat:43.1975,lng:140.9950,name:'滝波食堂',desc:'午餐：元祖わがまま丼',icon:'🦀'},
+      {lat:43.1970,lng:140.9940,name:'小樽運河',desc:'經典拍照點',icon:'📸'},
+      {lat:43.1930,lng:140.9980,name:'堺町通り',desc:'800m商店街',icon:'🛍️'},
+      {lat:43.1935,lng:140.9990,name:'LeTAO 總店',desc:'現做 DoubleFromage',icon:'🧀'},
+      {lat:43.1870,lng:140.9910,name:'小樽住吉神社',desc:'鳥居+海景拍照',icon:'⛩️'},
+      {lat:43.0558,lng:141.3505,name:'札幌 Airbnb',desc:'Check-in',icon:'🏨'},
+    ]
+  },
+  4: {
+    center: [43.05, 141.34], zoom: 12,
+    stops: [
+      {lat:43.0560,lng:141.3590,name:'二條市場',desc:'早餐：海鮮丼',icon:'🐟'},
+      {lat:43.0547,lng:141.3280,name:'北海道神宮',desc:'＋六花亭判官餅',icon:'⛩️'},
+      {lat:43.0550,lng:141.3260,name:'圓山公園',desc:'散步 20~30min',icon:'🌳'},
+      {lat:43.0545,lng:141.3525,name:'札幌拉麵 悠',desc:'午餐：必吃味噌拉麵',icon:'🍜'},
+      {lat:43.0810,lng:141.3076,name:'白色戀人公園',desc:'巧克力工廠',icon:'🍫'},
+      {lat:43.0617,lng:141.3545,name:'時計台',desc:'拍照打卡',icon:'📸'},
+      {lat:43.0640,lng:141.3502,name:'大通公園',desc:'散步+Parco購物',icon:'🌳'},
+      {lat:43.0500,lng:141.3530,name:'Suage+ 湯咖哩',desc:'晚餐：Tabelog名店',icon:'🍛'},
+      {lat:43.0232,lng:141.3283,name:'藻岩山展望台',desc:'日本三大夜景',icon:'🌃'},
+    ]
+  },
+  5: {
+    center: [43.4, 141.8], zoom: 8,
+    stops: [
+      {lat:43.0558,lng:141.3505,name:'札幌出發',desc:'08:30 出發',icon:'🚗'},
+      {lat:43.7680,lng:142.4850,name:'旭山動物園',desc:'🐧企鵝散步 11:00',icon:'🐧'},
+      {lat:43.7700,lng:142.3580,name:'拉麵 青葉本店',desc:'午餐：旭川拉麵元祖',icon:'🍜'},
+      {lat:43.7740,lng:142.3620,name:'福吉カフェ',desc:'大正建築咖啡廳',icon:'☕'},
+      {lat:43.7690,lng:142.3590,name:'平和通買物公園',desc:'購物街',icon:'🛍️'},
+      {lat:43.7627,lng:142.3577,name:'JR Inn Asahikawa',desc:'住宿',icon:'🏨'},
+    ]
+  },
+  6: {
+    center: [43.3, 142.0], zoom: 8,
+    stops: [
+      {lat:43.7627,lng:142.3577,name:'JR Inn 旭川',desc:'出發',icon:'🚗'},
+      {lat:43.7680,lng:142.3600,name:'成吉思汗 大黒屋',desc:'早午餐',icon:'🐑'},
+      {lat:42.9880,lng:141.4540,name:'三井 Outlet Park',desc:'購物+午餐',icon:'🛍️'},
+      {lat:42.7752,lng:141.6922,name:'新千歲機場',desc:'19:30 ✈️ 東京',icon:'✈️'},
+    ]
+  }
+};
+
+const overviewStops = [
+  {lat:42.7752,lng:141.6922,name:'千歲機場',color:'#E74C3C',day:'D1'},
+  {lat:42.6340,lng:141.6050,name:'苫小牧',color:'#E74C3C',day:'D1'},
+  {lat:42.4953,lng:141.1432,name:'登別溫泉',color:'#E74C3C',day:'D1'},
+  {lat:42.5710,lng:140.8510,name:'洞爺湖',color:'#3498DB',day:'D2'},
+  {lat:43.1970,lng:140.9940,name:'小樽',color:'#2ECC71',day:'D3'},
+  {lat:43.0558,lng:141.3505,name:'札幌',color:'#F39C12',day:'D3-4'},
+  {lat:43.7680,lng:142.4850,name:'旭川',color:'#9B59B6',day:'D5'},
+  {lat:42.9880,lng:141.4540,name:'北廣島Outlet',color:'#1ABC9C',day:'D6'},
+  {lat:42.7752,lng:141.6922,name:'千歲機場✈️',color:'#1ABC9C',day:'D6'},
+];
+
+function createNumberIcon(num, color) {
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `<div style="background:${color};color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.4);">${num}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -16]
+  });
+}
+
+function initMap(dayNum) {
+  const id = dayNum === 0 ? 'map0' : `map${dayNum}`;
+  const el = document.getElementById(id);
+  if (!el || maps[id]) return;
+
+  if (dayNum === 0) {
+    const map = L.map(id, { scrollWheelZoom: false }).setView([43.1, 141.5], 7);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+    }).addTo(map);
+
+    const coords = [];
+    overviewStops.forEach((s, i) => {
+      const marker = L.marker([s.lat, s.lng], { icon: createNumberIcon(s.day, s.color) }).addTo(map);
+      marker.bindPopup(`<div class="popup-title">${s.name}</div><div class="popup-desc">${s.day}</div>`);
+      coords.push([s.lat, s.lng]);
+    });
+    L.polyline(coords, { color: '#4fc3f7', weight: 2.5, opacity: 0.6, dashArray: '8,8' }).addTo(map);
+    map.fitBounds(coords, { padding: [30, 30] });
+    maps[id] = map;
+    return;
+  }
+
+  const data = routeData[dayNum];
+  if (!data) return;
+  const color = dayColors[dayNum];
+  const map = L.map(id, { scrollWheelZoom: false }).setView(data.center, data.zoom);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+  }).addTo(map);
+
+  const coords = [];
+  data.stops.forEach((s, i) => {
+    const marker = L.marker([s.lat, s.lng], { icon: createNumberIcon(i + 1, color) }).addTo(map);
+    marker.bindPopup(`<div class="popup-title">${s.icon} ${s.name}</div><div class="popup-desc">${s.desc}</div>`);
+    coords.push([s.lat, s.lng]);
+  });
+  L.polyline(coords, { color: color, weight: 3, opacity: 0.7, dashArray: '10,6' }).addTo(map);
+  map.fitBounds(coords, { padding: [40, 40] });
+  maps[id] = map;
+}
+
 function showDay(n) {
   document.querySelectorAll('.day-section').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.day-tab').forEach(el => el.classList.remove('active'));
@@ -1279,7 +1641,18 @@ function showDay(n) {
   tabs[tabIndex].classList.add('active');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Init map after DOM switch
+  setTimeout(() => {
+    initMap(n);
+    // Invalidate size for proper rendering
+    const id = n === 0 ? 'map0' : `map${n}`;
+    if (maps[id]) maps[id].invalidateSize();
+  }, 100);
 }
+
+// Init Day 1 map on load
+document.addEventListener('DOMContentLoaded', () => { setTimeout(() => initMap(1), 300); });
 </script>
 
 </body>
